@@ -75,9 +75,14 @@ int MainHashFuncCep(HashTableListCep *table, ElemToUseList ElenToHash)
               % PowerUniverse) % table->capacity;
   return hash;
 }
+void ReHashCep(HashTableListCep *table);
 
 void AddElemTableList(HashTableListCep *table, ElemToUseList ElemToAdd)
 {
+    if(table->size > (int)(((double )table->capacity) * table->load_factor))
+    {
+        ReHashCep(table);
+    }
 
   int hash = table->HashFunc(table, ElemToAdd);
 
@@ -103,6 +108,31 @@ void List_remove_Elem_on_O1(List *list, int ind_to_ins) {
 
   list->arr[0].val = ind_to_ins;
 }
+
+void ReHashCep(HashTableListCep *table)
+{
+    int old_cap = table->capacity;
+    table->capacity *= 2;
+    ElemTableList *old_arr = table->arr;
+    InitTableList(table, table->capacity, table->HashFunc);
+
+
+    for(int i = 0; i < old_cap; i++)
+    {
+        if(old_arr[i].arr[0].val != 1)
+        {
+            Elem_listCep *cur_elem = old_arr[i].arr + old_arr[i].arr[0].next;
+
+            while(cur_elem != old_arr[i].arr){
+                AddElemTableList(table, cur_elem->val);
+                cur_elem = old_arr[i].arr + cur_elem->next;
+            }
+            free(old_arr[i].arr);
+        }
+    }
+    free(old_arr);
+}
+
 
 void RemoveTableElemCep(HashTableListCep *table, long int ElemToRemove)
 {

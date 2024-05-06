@@ -29,12 +29,15 @@ TestTimeAll DoOneTest(int size, int max_size, int amount_find)
     TestTimeAll ret = {};
 
     HashTableListCep hash_cep = {};
+    hash_cep.load_factor = (double) 8 / (double) 10;
     InitTableList(&hash_cep, size * 2, &MainHashFuncCep);
 
     HashTable hash_lin = {};
+    hash_lin.load_factor = (double) 8 / (double) 10;
     InitTable(&hash_lin, size * 2, &MainHashFunc);
 
     HashTable hash_qud = {};
+    hash_qud.load_factor = (double) 8 / (double) 10;
     InitTable(&hash_qud, size * 2, &MainHashFunc);
 
     int *data = (int *)calloc(size, sizeof(int));
@@ -43,7 +46,7 @@ TestTimeAll DoOneTest(int size, int max_size, int amount_find)
     srand(clock());
 
     HashTablePerfect hash_pefect = {};
-    InitTablePerfect(&hash_pefect, size, &MainHashFuncPerfect, true);
+    InitTablePerfect(&hash_pefect, (int)sqrt((double) size) * 2, &MainHashFuncPerfect, true);
 
     for(int i = 0; i < size; i++)
     {
@@ -51,11 +54,6 @@ TestTimeAll DoOneTest(int size, int max_size, int amount_find)
         AddElemTableList(&hash_cep, data[i]);
         AddElemTableLin(&hash_lin, data[i]);
         AddElemTableQuad(&hash_qud, data[i]);
-    }
-    GenFirstHashFunc(&hash_pefect, data, size, 4 * hash_pefect.capacity);
-    for(int i = 0; i < hash_pefect.capacity; i++)
-    {
-        GenFirstHashFunc(hash_pefect.arr[i].val, hash_pefect.arr[i].arr, hash_pefect.arr[i].step, hash_pefect.arr[i].size);
     }
 
     for(int i = 0; i < amount_find; i++)
@@ -84,6 +82,19 @@ TestTimeAll DoOneTest(int size, int max_size, int amount_find)
     }
     ret.hash_qud.Insert = clock() - ret.hash_qud.Insert;
 
+    for(int i = 0; i < hash_cep.capacity; i++)
+    {
+        free(hash_cep.arr[i].arr);
+    }
+    free(hash_qud.arr);
+    free(hash_lin.arr);
+    free(hash_cep.arr);
+
+    GenFirstHashFunc(&hash_pefect, data, size, 4 * hash_pefect.capacity);
+    for(int i = 0; i < hash_pefect.capacity; i++)
+    {
+        GenFirstHashFunc(hash_pefect.arr[i].val, hash_pefect.arr[i].arr, hash_pefect.arr[i].step, 8 * hash_pefect.arr[i].size);
+    }
     ret.hash_two.Insert = clock();
     for(int i = 0; i < size; i++)
     {
@@ -92,14 +103,8 @@ TestTimeAll DoOneTest(int size, int max_size, int amount_find)
     ret.hash_two.Insert = clock() - ret.hash_two.Insert;
 
 
-    for(int i = 0; i < hash_cep.capacity; i++)
-    {
-        free(hash_cep.arr[i].arr);
-    }
-    free(hash_qud.arr);
     free(hash_pefect.arr);
-    free(hash_lin.arr);
-    free(hash_cep.arr);
+
 
 
     return ret;
@@ -119,7 +124,7 @@ int main() {
 
     for(int i = 1; i < SIZE + 1; i += 1)
     {
-        time = DoOneTest(10000, 100000000, 10000000);
+        time = DoOneTest(100000, 1000000, 10000000);
 
         time_insert[i - 1][0] += ((double) time.hash_lin.Insert) / (double )CLOCKS_PER_SEC;
         time_insert[i - 1][1] += ((double) time.hash_cep.Insert) / (double )CLOCKS_PER_SEC;
@@ -129,10 +134,10 @@ int main() {
 
     for(int i = 0; i < SIZE; i++)
     {
-        fprintf(stream_hash_lin, "%d,%lf\n", (100000 * (i + 1)), time_insert[i][0]);
-        fprintf(stream_cep_Hash, "%d,%lf\n", (100000 * (i + 1)), time_insert[i][1]);
-        fprintf(stream_hash_quad, "%ld,%lf\n", (100000 * (i + 1)), time_insert[i][2]);
-        fprintf(stream_Two_Hash, "%d,%lf\n", (100000 * (i + 1)), time_insert[i][3]);
+        fprintf(stream_hash_lin, "%d, %lf\n",1,  time_insert[i][0]);
+        fprintf(stream_cep_Hash, "%d, %lf\n",1,  time_insert[i][1]);
+        fprintf(stream_hash_quad, "%d, %lf\n",1,  time_insert[i][2]);
+        fprintf(stream_Two_Hash, "%d, %lf\n",1, time_insert[i][3]);
     }
     fclose(stream_hash_lin);
     fclose(stream_cep_Hash);

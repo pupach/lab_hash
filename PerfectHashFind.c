@@ -58,14 +58,6 @@ void GenFirstHashFunc(HashTablePerfect *table, int *val, int AmountCom, int ogra
     int cnt = 0;
     do{
         cnt1++;
-        if((cnt1 % 100) == 0)
-        {
-
-            if(cnt1 == 200)
-            {
-                //exit(-1);
-            }
-        }
         table->consts[0] = rand() % table->capacity;
         table->consts[1] = rand() % table->capacity;
         table->consts[2] = (rand() + table->capacity) % (3 * table->capacity + 1) + 1;
