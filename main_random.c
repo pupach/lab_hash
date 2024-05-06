@@ -125,17 +125,17 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity)
 
 int main() {
     TestTimeAll time;
-    FILE *stream_hash_lin   = fopen("hash_lin.txt",    "w");
-    FILE *stream_cep_Hash = fopen("Cep_Hash.txt", "w");
-    FILE *stream_hash_quad  = fopen("hash_quad.txt",  "w");
-    FILE *stream_Two_Hash    = fopen("Two_Hash.txt",    "w");
+    FILE *stream_hash_lin   = fopen("hash_lin_random.txt",    "w");
+    FILE *stream_cep_Hash = fopen("Cep_Hash_random.txt", "w");
+    FILE *stream_hash_quad  = fopen("hash_quad_random.txt",  "w");
+    FILE *stream_Two_Hash    = fopen("Two_Hash_random.txt",    "w");
     double time_insert[SIZE][4] = {};
     double time_remove[SIZE][4] = {};
     //DoOneTest(1000, 1000, 10000);
 
     for(int i = 1; i < SIZE + 1; i += 1)
     {
-        time = DoOneTest(100, 100000000, (i)*10000 + 10);
+        time = DoOneTest(100, 10000000, (i)*10000 + 10);
 
         time_insert[i - 1][0] += ((double) time.hash_lin.Insert) / (double )CLOCKS_PER_SEC;
         time_insert[i - 1][1] += ((double) time.hash_cep.Insert) / (double )CLOCKS_PER_SEC;

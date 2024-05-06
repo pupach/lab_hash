@@ -1,21 +1,21 @@
 import matplotlib.pyplot as plt
 import csv
 
-fileNames = ["AVL_insert", "decart_insert", "splay_insert", "RBT_insert", "AVL_remove", "decart_remove", "splay_remove", "RBT_remove"]
+fileNames = ["hash_lin", "Cep_Hash", "hash_quad", "Two_Hash", "hash_lin_find", "Cep_Hash_find", "hash_quad_find", "Perfect_find"
+             , "hash_lin_random", "Cep_Hash_random", "hash_quad_random", "Two_Hash_random"]
 
 title     = "square sorts"
 units     = "ms"
 
 
-dataDir   = "data/"
-graphDir  = "graphs/"
+dataDir   = "cmake-build-debug"
+graphDir  = ""
 
 X = []
 Y = []
 
 for name in fileNames:
-
-    with open(dataDir + name + ".csv", 'r') as dataFile:
+    with open(dataDir + name + ".txt", 'r') as dataFile:
         plotting = csv.reader(dataFile, delimiter=',')
         
         for ROWS in plotting:

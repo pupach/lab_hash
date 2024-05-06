@@ -21,7 +21,7 @@ int MainHashFunc(HashTable *table, ElemToUse ElenToHash)
 
 void AddElemTableLin(HashTable *table, ElemToUse ElemToAdd)
 {
-    int hash = table->HashFunc(table, ElemToAdd);
+    int hash = MainHashFunc(table, ElemToAdd);
     while(table->arr[hash].val != POISON_VAL && (table->arr[hash].val != ElemToAdd))
     {
         hash = (hash + 1) % table->capacity;
@@ -83,7 +83,7 @@ void RemoveElemTableQuad(HashTable *table, ElemToUse ElemToRemove)
 
 void RemoveElemTableLin(HashTable *table, ElemToUse ElemToRemove)
 {
-    int hash = table->HashFunc(table, ElemToRemove);
+    int hash = MainHashFunc(table, ElemToRemove);
     while((table->arr[hash].val != POISON_VAL) && (table->arr[hash].val != ElemToRemove))
     {
         hash = (hash + 1) % table->capacity;
@@ -93,7 +93,7 @@ void RemoveElemTableLin(HashTable *table, ElemToUse ElemToRemove)
 
 bool FindElemTableQuad(HashTable *table, ElemToUse ElemToFind)
 {
-    int hash = table->HashFunc(table, ElemToFind);
+    int hash = MainHashFunc(table, ElemToFind);
     int step = 0;
     while((table->arr[hash].val != POISON_VAL) && (table->arr[hash].val != ElemToFind))
     {
@@ -107,7 +107,7 @@ bool FindElemTableQuad(HashTable *table, ElemToUse ElemToFind)
 
 bool FindElemTableLin(HashTable *table, ElemToUse ElemToFind)
 {
-    int hash = table->HashFunc(table, ElemToFind);
+    int hash = MainHashFunc(table, ElemToFind);
     while((table->arr[hash].val != POISON_VAL) && (table->arr[hash].val != ElemToFind))
     {
         hash = (hash + 1) % table->capacity;
