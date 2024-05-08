@@ -24,21 +24,25 @@ typedef struct{
 }TestTimeAll;
 
 
-TestTimeAll DoOneTest(int size, int max_size, int capacity)
+TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
 {
     TestTimeAll ret = {};
 
     HashTableListCep hash_cep = {};
+    hash_cep.load_factor = load_factor;
     InitTableList(&hash_cep, capacity, &MainHashFuncCep);
 
     HashTable hash_lin = {};
+    hash_lin.load_factor = load_factor;
     InitTable(&hash_lin, capacity, &MainHashFunc);
 
     HashTable hash_qud = {};
+    hash_qud.load_factor = load_factor;
     InitTable(&hash_qud, capacity, &MainHashFunc);
 
-    //HashTable hash_two = {};
-    // InitTablePerfect(&hash_two, (int)sqrt((double )capacity) * 2, &MainHashFuncPerfect, true);
+    HashTable hash_two = {};
+    hash_two.load_factor = load_factor;
+    InitTable(&hash_two, capacity, &MainHashFunc);
 
     int (*data)[2] = (int *)calloc(size, sizeof(int[2]));
 
@@ -70,15 +74,15 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity)
     for(int i = 0; i < size; i++)
     {
         if(data[i][0] == 0) {
-            AddElemTableLin(&hash_cep, data[i][1]);
+            AddElemTableLin(&hash_lin, data[i][1]);
         }
         else if(data[i][0] == 1)
         {
-            RemoveElemTableLin(&hash_cep, data[i][1]);
+            RemoveElemTableLin(&hash_lin, data[i][1]);
         }
         else
         {
-            FindElemTableLin(&hash_cep, data[i][1]);
+            FindElemTableLin(&hash_lin, data[i][1]);
         }
     }
     ret.hash_lin.Insert = clock() - ret.hash_lin.Insert;
@@ -87,41 +91,51 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity)
     for(int i = 0; i < size; i++)
     {
         if(data[i][0] == 0) {
-            AddElemTableQuad(&hash_cep, data[i][1]);
+            AddElemTableQuad(&hash_qud, data[i][1]);
         }
         else if(data[i][0] == 1)
         {
-            RemoveElemTableQuad(&hash_cep, data[i][1]);
+            RemoveElemTableQuad(&hash_qud, data[i][1]);
         }
         else
         {
-            FindElemTableQuad(&hash_cep, data[i][1]);
+            FindElemTableQuad(&hash_qud, data[i][1]);
         }
     }
     ret.hash_qud.Insert = clock() - ret.hash_qud.Insert;
 
-    /*ret.hash_two.Insert = clock();
+    ret.hash_two.Insert = clock();
     for(int i = 0; i < size; i++)
     {
-        AddElemTableHash(&hash_two, data[i]);
+        if(data[i][0] == 0) {
+            AddElemTableQuad(&hash_qud, data[i][1]);
+        }
+        else if(data[i][0] == 1)
+        {
+            RemoveElemTableQuad(&hash_qud, data[i][1]);
+        }
+        else
+        {
+            FindElemTableQuad(&hash_qud, data[i][1]);
+        }
     }
     ret.hash_two.Insert = clock() - ret.hash_two.Insert;
 
-    */
     for(int i = 0; i < hash_cep.capacity; i++)
     {
         free(hash_cep.arr[i].arr);
     }
     free(hash_qud.arr);
-    // free(hash_two.arr);
+    free(hash_two.arr);
     free(hash_lin.arr);
+    free(data);
     free(hash_cep.arr);
 
 
     return ret;
 }
 
-#define SIZE 1
+#define SIZE 100
 
 int main() {
     TestTimeAll time;
@@ -135,20 +149,23 @@ int main() {
 
     for(int i = 1; i < SIZE + 1; i += 1)
     {
-        time = DoOneTest(100, 10000000, (i)*10000 + 10);
+        for(int j = 0; j < 3; j++) {
+            fprintf(stderr, "%d\n", i);
+            time = DoOneTest(10000 * i, 10000000, 1000, (double) 5 / (double) 12);
 
-        time_insert[i - 1][0] += ((double) time.hash_lin.Insert) / (double )CLOCKS_PER_SEC;
-        time_insert[i - 1][1] += ((double) time.hash_cep.Insert) / (double )CLOCKS_PER_SEC;
-        time_insert[i - 1][2] += ((double) time.hash_qud.Insert) / (double )CLOCKS_PER_SEC;
-        //time_insert[i - 1][3] += ((double) time.hash_two.Insert) / (double )CLOCKS_PER_SEC;
+            time_insert[i - 1][0] += ((double) time.hash_lin.Insert) / (double) CLOCKS_PER_SEC / 3;
+            time_insert[i - 1][1] += ((double) time.hash_cep.Insert) / (double) CLOCKS_PER_SEC / 3;
+            time_insert[i - 1][2] += ((double) time.hash_qud.Insert) / (double) CLOCKS_PER_SEC / 3;
+            time_insert[i - 1][3] += ((double) time.hash_two.Insert) / (double) CLOCKS_PER_SEC / 3;
+        }
     }
 
     for(int i = 0; i < SIZE; i++)
     {
-        fprintf(stream_hash_lin, "%d,%lf\n", (100000 * (i + 1)), time_insert[i][0]);
-        fprintf(stream_cep_Hash, "%d,%lf\n", (100000 * (i + 1)), time_insert[i][1]);
-        fprintf(stream_hash_quad, "%ld,%lf\n", (100000 * (i + 1)), time_insert[i][2]);
-        //fprintf(stream_Two_Hash, "%d,%lf\n", (100000 * (i + 1)), time_insert[i][3]);
+        fprintf(stream_hash_lin, "%d,%lf\n", (10000 * (i + 1)), time_insert[i][0]);
+        fprintf(stream_cep_Hash, "%d,%lf\n", (10000 * (i + 1)), time_insert[i][1]);
+        fprintf(stream_hash_quad, "%d,%lf\n", (10000 * (i + 1)), time_insert[i][2]);
+        fprintf(stream_Two_Hash, "%d,%lf\n", (10000 * (i + 1)), time_insert[i][3]);
     }
     fclose(stream_hash_lin);
     fclose(stream_cep_Hash);

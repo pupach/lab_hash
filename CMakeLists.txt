@@ -13,9 +13,6 @@ add_executable(lab_hash main.c
         hash_lin.c
         hash_lin.h
         func.c
-        func.h
-        Perfect_Hash.c
-        Perfect_Hash.h
 )
 
 add_executable(lab_hash_find
@@ -37,7 +34,5 @@ add_executable(lab_hash_random
         hash_lin.h
         func.c
         func.h
-        Perfect_Hash.c
-        Perfect_Hash.h
         main_random.c)
 

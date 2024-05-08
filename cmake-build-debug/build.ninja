@@ -81,14 +81,6 @@ build CMakeFiles/lab_hash.dir/func.c.o: C_COMPILER__lab_hash_unscanned_Debug /ho
   TARGET_COMPILE_PDB = CMakeFiles/lab_hash.dir/
   TARGET_PDB = lab_hash.pdb
 
-build CMakeFiles/lab_hash.dir/Perfect_Hash.c.o: C_COMPILER__lab_hash_unscanned_Debug /home/pupach/CLionProjects/lab_hash/Perfect_Hash.c || cmake_object_order_depends_target_lab_hash
-  DEP_FILE = CMakeFiles/lab_hash.dir/Perfect_Hash.c.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles/lab_hash.dir
-  OBJECT_FILE_DIR = CMakeFiles/lab_hash.dir
-  TARGET_COMPILE_PDB = CMakeFiles/lab_hash.dir/
-  TARGET_PDB = lab_hash.pdb
-
 
 # =============================================================================
 # Link build statements for EXECUTABLE target lab_hash
@@ -97,7 +89,7 @@ build CMakeFiles/lab_hash.dir/Perfect_Hash.c.o: C_COMPILER__lab_hash_unscanned_D
 #############################################
 # Link the executable lab_hash
 
-build lab_hash: C_EXECUTABLE_LINKER__lab_hash_Debug CMakeFiles/lab_hash.dir/main.c.o CMakeFiles/lab_hash.dir/hash_cep.c.o CMakeFiles/lab_hash.dir/hash_lin.c.o CMakeFiles/lab_hash.dir/func.c.o CMakeFiles/lab_hash.dir/Perfect_Hash.c.o
+build lab_hash: C_EXECUTABLE_LINKER__lab_hash_Debug CMakeFiles/lab_hash.dir/main.c.o CMakeFiles/lab_hash.dir/hash_cep.c.o CMakeFiles/lab_hash.dir/hash_lin.c.o CMakeFiles/lab_hash.dir/func.c.o
   FLAGS = -g
   LINK_FLAGS = -fsanitize=address -lm
   OBJECT_DIR = CMakeFiles/lab_hash.dir
@@ -207,14 +199,6 @@ build CMakeFiles/lab_hash_random.dir/func.c.o: C_COMPILER__lab_hash_random_unsca
   TARGET_COMPILE_PDB = CMakeFiles/lab_hash_random.dir/
   TARGET_PDB = lab_hash_random.pdb
 
-build CMakeFiles/lab_hash_random.dir/Perfect_Hash.c.o: C_COMPILER__lab_hash_random_unscanned_Debug /home/pupach/CLionProjects/lab_hash/Perfect_Hash.c || cmake_object_order_depends_target_lab_hash_random
-  DEP_FILE = CMakeFiles/lab_hash_random.dir/Perfect_Hash.c.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles/lab_hash_random.dir
-  OBJECT_FILE_DIR = CMakeFiles/lab_hash_random.dir
-  TARGET_COMPILE_PDB = CMakeFiles/lab_hash_random.dir/
-  TARGET_PDB = lab_hash_random.pdb
-
 build CMakeFiles/lab_hash_random.dir/main_random.c.o: C_COMPILER__lab_hash_random_unscanned_Debug /home/pupach/CLionProjects/lab_hash/main_random.c || cmake_object_order_depends_target_lab_hash_random
   DEP_FILE = CMakeFiles/lab_hash_random.dir/main_random.c.o.d
   FLAGS = -g -fdiagnostics-color=always
@@ -231,7 +215,7 @@ build CMakeFiles/lab_hash_random.dir/main_random.c.o: C_COMPILER__lab_hash_rando
 #############################################
 # Link the executable lab_hash_random
 
-build lab_hash_random: C_EXECUTABLE_LINKER__lab_hash_random_Debug CMakeFiles/lab_hash_random.dir/hash_cep.c.o CMakeFiles/lab_hash_random.dir/hash_lin.c.o CMakeFiles/lab_hash_random.dir/func.c.o CMakeFiles/lab_hash_random.dir/Perfect_Hash.c.o CMakeFiles/lab_hash_random.dir/main_random.c.o
+build lab_hash_random: C_EXECUTABLE_LINKER__lab_hash_random_Debug CMakeFiles/lab_hash_random.dir/hash_cep.c.o CMakeFiles/lab_hash_random.dir/hash_lin.c.o CMakeFiles/lab_hash_random.dir/func.c.o CMakeFiles/lab_hash_random.dir/main_random.c.o
   FLAGS = -g
   LINK_FLAGS = -fsanitize=address -lm
   OBJECT_DIR = CMakeFiles/lab_hash_random.dir
