@@ -1,5 +1,0 @@
-/home/pupach/CLionProjects/lab_hash/cmake-build-debug/CMakeFiles/lab_hash.dir
-/home/pupach/CLionProjects/lab_hash/cmake-build-debug/CMakeFiles/lab_hash_find.dir
-/home/pupach/CLionProjects/lab_hash/cmake-build-debug/CMakeFiles/lab_hash_random.dir
-/home/pupach/CLionProjects/lab_hash/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/pupach/CLionProjects/lab_hash/cmake-build-debug/CMakeFiles/rebuild_cache.dir

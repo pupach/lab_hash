@@ -1,8 +1,0 @@
-# ninja log v5
-1	26	1715097501712231317	CMakeFiles/lab_hash_random.dir/main_random.c.o	f2e3d78e57a70839
-28	43	1715164819928128749	lab_hash	5637c332f70d2109
-0	10	1715202575980898590	build.ninja	9fb828182462afd2
-30	45	1715098458927958031	lab_hash_find	d2edafb447b3d6b1
-26	43	1715097501728231522	lab_hash_random	fb7bb093b2930c3e
-2	23	1715098458903958433	CMakeFiles/lab_hash_find.dir/find_main.c.o	e4a76261464ddeca
-3	28	1715164819916128654	CMakeFiles/lab_hash.dir/main.c.o	868f7a3daa8a6eeb
