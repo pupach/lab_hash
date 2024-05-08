@@ -53,7 +53,7 @@
 
 ![Хэш-таблицы, график](graph/hash_1_random_075png.png)
 
-![Хэш-таблицы, график](graph/hash_1_random_075_withut_ceppng.png)
+![Хэш-таблицы, график](graph/hash_1_random_075_without_ceppng.png)
 
 ## Пункт 3 Сравнение Обычного Хэширования с Идеальным
 
