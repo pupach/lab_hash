@@ -40,7 +40,7 @@
 
 ![Хэш-таблицы, график](graph/hash_2_randpng.png)
 
-![Хэш-таблицы, график](graph/hash_2_rand_wittout_ceppng.png)
+![Хэш-таблицы, график](graph/hash_2_rand_witout_ceppng.png)
 
 Как видно при меньшем процентном соотношении вставок, two_hash становится по эффективности таким же, как и остальные две(реализация hash_cep просто)
 
@@ -49,11 +49,11 @@
 
 ![Хэш-таблицы, график](graph/hash_1_random_025png.png)
 
-![Хэш-таблицы, график](graph/hash_1_random_025_without_ceppng.png)
+![Хэш-таблицы, график](graph/hash_1_random_025_withut_ceppng.png)
 
 ![Хэш-таблицы, график](graph/hash_1_random_075png.png)
 
-![Хэш-таблицы, график](graph/hash_1_random_075_without_ceppng.png)
+![Хэш-таблицы, график](graph/hash_1_random_075_withut_ceppng.png)
 
 ## Пункт 3 Сравнение Обычного Хэширования с Идеальным
 
