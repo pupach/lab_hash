@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 import csv
 
-fileNames = ["hash_lin", "Cep_Hash", "hash_quad", "Two_Hash"]
+fileNames = ["hash_lin_find", "hash_quad_find", "Perfect_find"]
 
-title     = "hash_1"
+title     = "hash_2_find"
 units     = "ms"
 
 
@@ -19,7 +19,7 @@ for name in fileNames:
         
         for ROWS in plotting:
             print(ROWS, name)
-            X.append(float(ROWS[0]))
+            X.append(int(ROWS[0]))
             Y.append(float(ROWS[1]))
 
     plt.plot(X, Y)
@@ -32,7 +32,7 @@ plt.legend(fileNames)
 
 plt.title(title)
 
-plt.xlabel("load_factor")
+plt.xlabel("size")
 plt.ylabel(units)
 
 plt.savefig(graphDir + title + "png")

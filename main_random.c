@@ -128,6 +128,7 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
     free(hash_qud.arr);
     free(hash_two.arr);
     free(hash_lin.arr);
+    free(data);
     free(hash_cep.arr);
 
 
@@ -148,13 +149,15 @@ int main() {
 
     for(int i = 1; i < SIZE + 1; i += 1)
     {
-        fprintf(stderr, "%d\n", i);
-        time = DoOneTest(10000 * i, 10000000, 1000, (double)4 / (double)5);
+        for(int j = 0; j < 3; j++) {
+            fprintf(stderr, "%d\n", i);
+            time = DoOneTest(10000 * i, 10000000, 1000, (double) 5 / (double) 12);
 
-        time_insert[i - 1][0] += ((double) time.hash_lin.Insert) / (double )CLOCKS_PER_SEC;
-        time_insert[i - 1][1] += ((double) time.hash_cep.Insert) / (double )CLOCKS_PER_SEC;
-        time_insert[i - 1][2] += ((double) time.hash_qud.Insert) / (double )CLOCKS_PER_SEC;
-        //time_insert[i - 1][3] += ((double) time.hash_two.Insert) / (double )CLOCKS_PER_SEC;
+            time_insert[i - 1][0] += ((double) time.hash_lin.Insert) / (double) CLOCKS_PER_SEC / 3;
+            time_insert[i - 1][1] += ((double) time.hash_cep.Insert) / (double) CLOCKS_PER_SEC / 3;
+            time_insert[i - 1][2] += ((double) time.hash_qud.Insert) / (double) CLOCKS_PER_SEC / 3;
+            time_insert[i - 1][3] += ((double) time.hash_two.Insert) / (double) CLOCKS_PER_SEC / 3;
+        }
     }
 
     for(int i = 0; i < SIZE; i++)

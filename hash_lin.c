@@ -14,8 +14,7 @@ void swap(ElemToUse *l1, ElemToUse *l2)
 
 int MainHashFunc(HashTable *table, ElemToUse ElenToHash)
 {
-    int hash = ((ElenToHash * table->consts[0] + table->consts[1])
-                % PowerUniverse) % table->capacity;
+    int hash = ElenToHash% table->capacity;
     return hash;
 }
 

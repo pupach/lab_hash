@@ -127,8 +127,12 @@ void ReHashCep(HashTableListCep *table)
                 AddElemTableList(table, cur_elem->val);
                 cur_elem = old_arr[i].arr + cur_elem->next;
             }
-            free(old_arr[i].arr);
         }
+    }
+
+    for(int i = 0; i < old_cap; i++)
+    {
+        free(old_arr[i].arr);
     }
     free(old_arr);
 }
