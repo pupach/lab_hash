@@ -97,7 +97,6 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
     free(hash_cep.arr);
     free(data);
 
-
     return ret;
 }
 
