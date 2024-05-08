@@ -1,6 +1,5 @@
 #include "hash_chain.h"
 #include "hash_open_adress.h"
-#include "Perfect_Hash.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -90,10 +89,10 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
     ret.hash_qud.Insert = clock();
     for(int i = 0; i < size; i++)
     {
-        if(data[i][0] == 0) {
+        if(data[i][0] < 3) {
             FindElemTableQuad(&hash_qud, data[i][1]);
         }
-        else if(data[i][0] == 1)
+        else if(data[i][0] < 6)
         {
             RemoveElemTableQuad(&hash_qud, data[i][1]);
         }
@@ -139,10 +138,10 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
 
 int main() {
     TestTimeAll time;
-    FILE *stream_hash_lin   = fopen("hash_lin_random_075.txt",    "w");
-    FILE *stream_cep_Hash = fopen("Cep_Hash_random_075.txt", "w");
-    FILE *stream_hash_quad  = fopen("hash_quad_random_075.txt",  "w");
-    FILE *stream_Two_Hash    = fopen("Two_Hash_random_075.txt",    "w");
+    FILE *stream_hash_lin   = fopen("../data/hash_lin_random_025.txt",    "w");
+    FILE *stream_cep_Hash = fopen("../data/Cep_Hash_random_025.txt", "w");
+    FILE *stream_hash_quad  = fopen("../data/hash_quad_random_025.txt",  "w");
+    FILE *stream_Two_Hash    = fopen("../data/Two_Hash_random_025.txt",    "w");
     double time_insert[SIZE][4] = {};
     double time_remove[SIZE][4] = {};
     //DoOneTest(1000, 1000, 10000);

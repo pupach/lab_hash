@@ -1,14 +1,14 @@
 import matplotlib.pyplot as plt
 import csv
 
-fileNames = ["hash_lin_find", "hash_quad_find", "Perfect_find"]
+fileNames = ["hash_lin_random_025", "hash_quad_random_025", "Two_Hash_random_025"]
 
-title     = "hash_2_find"
+title     = "hash_1_random_025_withut_cep"
 units     = "ms"
 
 
-dataDir   = "cmake-build-debug/"
-graphDir  = ""
+dataDir   = "data/"
+graphDir  = "graph/"
 
 X = []
 Y = []
