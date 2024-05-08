@@ -1,4 +1,4 @@
-#include "hash_cep.h"
+#include "hash_chain.h"
 
 void List_init(List *list, int beg_capacity)
 {

@@ -2,7 +2,7 @@
 // Created by pupach on 03.05.24.
 //
 
-#include "hash_lin.h"
+#include "hash_open_adress.h"
 
 
 void swap(ElemToUse *l1, ElemToUse *l2)

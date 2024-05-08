@@ -2,7 +2,7 @@
 // Created by pupach on 06.05.24.
 //
 
-#include "PerfectHashFind.h"
+#include "Hash_Perfect.h"
 
 int MainHashFuncPerfect(HashTablePerfect *table, ElemToUse ElenToHash)
 {

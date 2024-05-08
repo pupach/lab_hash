@@ -1,4 +1,4 @@
-# Install script for directory: /home/pupach/CLionProjects/lab_hash
+# Install script for directory: /home/pupach/CLionProjects/lab_hash_meow
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/pupach/CLionProjects/lab_hash/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/pupach/CLionProjects/lab_hash_meow/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
