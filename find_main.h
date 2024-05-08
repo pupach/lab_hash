@@ -1,5 +1,5 @@
-#include "hash_cep.h"
-#include "hash_lin.h"
+#include "hash_chain.h"
+#include "hash_open_adress.h"
 #include "Perfect_Hash.h"
 
 #include <stdio.h>

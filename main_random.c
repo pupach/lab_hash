@@ -1,5 +1,5 @@
-#include "hash_cep.h"
-#include "hash_lin.h"
+#include "hash_chain.h"
+#include "hash_open_adress.h"
 #include "Perfect_Hash.h"
 
 #include <stdio.h>
@@ -49,7 +49,7 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
     srand(clock());
     for(int i = 0; i < size; i++)
     {
-        data[i][0] = rand() % 3;
+        data[i][0] = rand() % 8;
         data[i][1] = rand() % max_size;
     }
 
@@ -57,7 +57,7 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
     for(int i = 0; i < size; i++)
     {
         if(data[i][0] == 0) {
-            AddElemTableList(&hash_cep, data[i][1]);
+            FindTableElemCep(&hash_cep, data[i][1]);
         }
         else if(data[i][0] == 1)
         {
@@ -65,7 +65,7 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
         }
         else
         {
-            FindTableElemCep(&hash_cep, data[i][1]);
+            AddElemTableList(&hash_cep, data[i][1]);
         }
     }
     ret.hash_cep.Insert = clock() - ret.hash_cep.Insert;
@@ -74,7 +74,7 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
     for(int i = 0; i < size; i++)
     {
         if(data[i][0] == 0) {
-            AddElemTableLin(&hash_lin, data[i][1]);
+            FindElemTableLin(&hash_lin, data[i][1]);
         }
         else if(data[i][0] == 1)
         {
@@ -82,7 +82,7 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
         }
         else
         {
-            FindElemTableLin(&hash_lin, data[i][1]);
+            AddElemTableLin(&hash_lin, data[i][1]);
         }
     }
     ret.hash_lin.Insert = clock() - ret.hash_lin.Insert;
@@ -91,7 +91,7 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
     for(int i = 0; i < size; i++)
     {
         if(data[i][0] == 0) {
-            AddElemTableQuad(&hash_qud, data[i][1]);
+            FindElemTableQuad(&hash_qud, data[i][1]);
         }
         else if(data[i][0] == 1)
         {
@@ -99,7 +99,7 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
         }
         else
         {
-            FindElemTableQuad(&hash_qud, data[i][1]);
+            AddElemTableQuad(&hash_qud, data[i][1]);
         }
     }
     ret.hash_qud.Insert = clock() - ret.hash_qud.Insert;
@@ -108,7 +108,7 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
     for(int i = 0; i < size; i++)
     {
         if(data[i][0] == 0) {
-            AddElemTableQuad(&hash_qud, data[i][1]);
+            FindElemTableQuad(&hash_qud, data[i][1]);
         }
         else if(data[i][0] == 1)
         {
@@ -116,7 +116,7 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
         }
         else
         {
-            FindElemTableQuad(&hash_qud, data[i][1]);
+            AddElemTableQuad(&hash_qud, data[i][1]);
         }
     }
     ret.hash_two.Insert = clock() - ret.hash_two.Insert;
@@ -139,10 +139,10 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
 
 int main() {
     TestTimeAll time;
-    FILE *stream_hash_lin   = fopen("hash_lin_random.txt",    "w");
-    FILE *stream_cep_Hash = fopen("Cep_Hash_random.txt", "w");
-    FILE *stream_hash_quad  = fopen("hash_quad_random.txt",  "w");
-    FILE *stream_Two_Hash    = fopen("Two_Hash_random.txt",    "w");
+    FILE *stream_hash_lin   = fopen("hash_lin_random_075.txt",    "w");
+    FILE *stream_cep_Hash = fopen("Cep_Hash_random_075.txt", "w");
+    FILE *stream_hash_quad  = fopen("hash_quad_random_075.txt",  "w");
+    FILE *stream_Two_Hash    = fopen("Two_Hash_random_075.txt",    "w");
     double time_insert[SIZE][4] = {};
     double time_remove[SIZE][4] = {};
     //DoOneTest(1000, 1000, 10000);

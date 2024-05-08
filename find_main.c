@@ -1,6 +1,6 @@
-#include "hash_cep.h"
-#include "hash_lin.h"
-#include "PerfectHashFind.h"
+#include "hash_chain.h"
+#include "hash_open_adress.h"
+#include "Hash_Perfect.h"
 
 #include <stdio.h>
 #include <stdlib.h>
