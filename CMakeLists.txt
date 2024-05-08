@@ -18,6 +18,7 @@ add_executable(lab_hash_find
         hash_chain.c
         hash_chain.h
         hash_open_adress.c
+
         hash_open_adress.h
         find_main.c
         find_main.h)
