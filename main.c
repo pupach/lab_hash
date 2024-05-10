@@ -1,6 +1,8 @@
 ﻿#include "hash_chain.h"
 #include "hash_open_adress.h"
-#include "Perfect_Hash.h"
+#include "Hash_Perfect.h"
+
+#define MAX_SIZE_DIR 100
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -104,10 +106,10 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
 
 int main() {
     TestTimeAll time;
-    FILE *stream_hash_lin   = fopen("hash_lin.txt",    "w");
-    FILE *stream_cep_Hash   = fopen("Cep_Hash.txt", "w");
-    FILE *stream_hash_quad  = fopen("hash_quad.txt",  "w");
-    FILE *stream_Two_Hash   = fopen("Two_Hash.txt",    "w");
+    FILE *stream_hash_lin   = fopen("../data/hash_lin.txt",    "w");
+    FILE *stream_cep_Hash   = fopen("../data/Cep_Hash.txt", "w");
+    FILE *stream_hash_quad  = fopen("../data/hash_quad.txt",  "w");
+    FILE *stream_Two_Hash   = fopen("../data/Two_Hash.txt",    "w");
     double time_insert[SIZE][4] = {};
     double time_remove[SIZE][4] = {};
     //DoOneTest(1000, 1000, 10000);

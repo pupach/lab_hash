@@ -114,10 +114,10 @@ TestTimeAll DoOneTest(int size, int max_size, int amount_find)
 
 int main() {
     TestTimeAll time;
-    FILE *stream_hash_lin   = fopen("hash_lin_find.txt",    "w");
-    FILE *stream_cep_Hash = fopen("Cep_Hash_find.txt", "w");
-    FILE *stream_hash_quad  = fopen("hash_quad_find.txt",  "w");
-    FILE *stream_Two_Hash    = fopen("Perfect_find.txt",    "w");
+    FILE *stream_hash_lin   = fopen("../data/hash_lin_find.txt",    "w");
+    FILE *stream_cep_Hash = fopen("../data/Cep_Hash_find.txt", "w");
+    FILE *stream_hash_quad  = fopen("../data/hash_quad_find.txt",  "w");
+    FILE *stream_Two_Hash    = fopen("../data/Perfect_find.txt",    "w");
     double time_insert[SIZE][4] = {};
     double time_remove[SIZE][4] = {};
     //DoOneTest(1000, 1000, 10000);
