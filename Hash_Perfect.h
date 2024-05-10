@@ -46,7 +46,7 @@ bool FindElemTablePerfect(HashTablePerfect *table, ElemToUse ElemToFind);
 
 void GenFirstHashFunc(HashTablePerfect *table, int *val, int AmountCom, int ogranich);
 
-int MainHashFuncPerfect(HashTablePerfect *table, ElemToUse ElenToHash);
+int HashPerfect(HashTablePerfect *table, ElemToUse ElenToHash);
 
 void InitTablePerfect(HashTablePerfect *table, int capacity, int(*HashFunc)(struct HashTablePerfect *, ElemToUse), bool head_table);
 

@@ -27,7 +27,7 @@ typedef struct{
 } TestTimeAll;
 
 
-TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
+TestTimeAll DoTest(int size, int max_size, int capacity, double load_factor)
 {
     TestTimeAll ret = {};
 
@@ -116,7 +116,7 @@ int main() {
     for(int i = 1; i < SIZE + 1; i += 1)
     {
         for(int j = 0; j < 3; j++) {
-            time = DoOneTest(100000, 10000000, 1000,  (double) 6 / (double) (i + 7) );
+            time = DoTest(100000, 10000000, 1000,  (double) 6 / (double) (i + 7) );
 
             time_insert[i - 1][0] += ((double) time.hash_lin.Insert) / (double) CLOCKS_PER_SEC / (double)3;
             time_insert[i - 1][1] += ((double) time.hash_cep.Insert) / (double) CLOCKS_PER_SEC / (double)3;

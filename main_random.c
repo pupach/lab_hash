@@ -27,7 +27,7 @@ typedef struct{
 }TestTimeAll;
 
 
-TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
+TestTimeAll DoTest(int size, int max_size, int capacity, double load_factor)
 {
     TestTimeAll ret = {};
 
@@ -144,13 +144,13 @@ int main() {
     FILE *stream_Two_Hash    = fopen("../data/Two_Hash_random_025.txt",    "w");
     double time_insert[SIZE][4] = {};
     double time_remove[SIZE][4] = {};
-    //DoOneTest(1000, 1000, 10000);
+    //DoTest(1000, 1000, 10000);
 
     for(int i = 1; i < SIZE + 1; i += 1)
     {
         for(int j = 0; j < 3; j++) {
             fprintf(stderr, "%d\n", i);
-            time = DoOneTest(10000 * i, 10000000, 1000, (double) 5 / (double) 12);
+            time = DoTest(10000 * i, 10000000, 1000, (double) 5 / (double) 12);
 
             time_insert[i - 1][0] += ((double) time.hash_lin.Insert) / (double) CLOCKS_PER_SEC / 3;
             time_insert[i - 1][1] += ((double) time.hash_cep.Insert) / (double) CLOCKS_PER_SEC / 3;

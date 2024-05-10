@@ -3,7 +3,7 @@
 #define CHECK_RES_CALLOC(ptr) \
     if(ptr == NULL) fprintf(stderr, "MEMPRY LIMIT ERROR\n");
 
-int MainHashFuncPerfect(HashTablePerfect *table, ElemToUse ElenToHash)
+int HashPerfect(HashTablePerfect *table, ElemToUse ElenToHash)
 {
   int hash = (((ElenToHash * table->consts[0] + table->consts[1])
               ) % table->consts[2] % table->capacity + table->capacity) % table->capacity;
@@ -11,7 +11,7 @@ int MainHashFuncPerfect(HashTablePerfect *table, ElemToUse ElenToHash)
   return hash;
 }
 
-int MainHashFuncPerfectHashTable(HashTable *table, ElemToUse ElenToHash)
+int HashPerfectForUsuallyHashTable(HashTable *table, ElemToUse ElenToHash)
 {
   int hash = (((ElenToHash * table->consts[0] + table->consts[1])
               ) % table->consts[2] % table->capacity + table->capacity) % table->capacity;
@@ -49,7 +49,7 @@ bool FindElemTablePerfect(HashTablePerfect *table, ElemToUse ElemToFind)
   HashTable *second_table = table->arr[hash].val;
 
   if(second_table->capacity == 0)  return false;
-  int hash_new = MainHashFuncPerfectHashTable(table->arr[hash].val, ElemToFind);
+  int hash_new = HashPerfectForUsuallyHashTable(table->arr[hash].val, ElemToFind);
   if(second_table->size == 0)  return false;
 
 
@@ -103,7 +103,7 @@ void GenFirstHashFunc(HashTablePerfect *table, int *val, int AmountCom, int ogra
 
   for(int i = 0; i < AmountCom; i++)
   {
-    int hash = MainHashFuncPerfect(table, val[i]);
+    int hash = HashPerfect(table, val[i]);
     table->arr[hash].size++;
   }
 
@@ -122,12 +122,12 @@ void GenFirstHashFunc(HashTablePerfect *table, int *val, int AmountCom, int ogra
   int h = 0;
   for(int i = 0; i < table->capacity; i++) {
     if (table->arr[i].size != 0) {
-      InitTablePerfect1(table->arr[i].val, table->arr[i].size * table->arr[i].size, &MainHashFuncPerfectHashTable, (double )100);
+      InitTablePerfect1(table->arr[i].val, table->arr[i].size * table->arr[i].size, &HashPerfectForUsuallyHashTable, (double )100);
       GenSecondHashFunc(table->arr[i].val, table->arr[i].arr, table->arr[i].step);
     }
     else
     {
-      InitTablePerfect1(table->arr[i].val, 1, &MainHashFuncPerfectHashTable, (double )100);
+      InitTablePerfect1(table->arr[i].val, 1, &HashPerfectForUsuallyHashTable, (double )100);
     }
   }
 
@@ -155,7 +155,7 @@ void GenSecondHashFunc(HashTable *table, int *val, int AmountCom)
   }while(cnt > AmountCom );
 
   for(int i = 0; i < AmountCom; i++) {
-    int hash = MainHashFuncPerfectHashTable(table, val[i]);
+    int hash = HashPerfectForUsuallyHashTable(table, val[i]);
 
     table->arr[hash].val  = val[i];
   }
@@ -189,7 +189,7 @@ int FindCollisionHashTablePerfect(HashTablePerfect *table, int* val, int len_val
   LOG("begin FindCollisionHashTablePerfect table->capacity = %d\n", table->capacity);
   for(int i = 0; i < len_val; i++)
   {
-    int hash = MainHashFuncPerfect(table, val[i]);
+    int hash = HashPerfect(table, val[i]);
     LOG("hash = %d val = %d |", hash, val[i]);
     arr[hash]++;
   }

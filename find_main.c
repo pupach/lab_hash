@@ -38,7 +38,7 @@ bool FindElem(int *arr, int size, int val)
 
 
 
-TestTimeAll DoOneTest(int size, int max_size, int amount_find, double probability)
+TestTimeAll DoTest(int size, int max_size, int amount_find, double probability)
 {
   TestTimeAll ret = {};
 
@@ -61,7 +61,7 @@ TestTimeAll DoOneTest(int size, int max_size, int amount_find, double probabilit
   srand(clock());
 
   HashTablePerfect hash_pefect = {};
-  InitTablePerfect(&hash_pefect,  size, &MainHashFuncPerfect, true);
+  InitTablePerfect(&hash_pefect,  size, &HashPerfect, true);
 
   for(int i = 0; i < size; i++)
   {
@@ -143,7 +143,7 @@ int main() {
   {
     for(int j = 0; j < 3; j++) {
       fprintf(stderr, "%d\n", i);
-      time = DoOneTest(100000, 1000000, 10000000, 1);
+      time = DoTest(100000, 1000000, 10000000, 1);
 
       time_insert[i - 1][0] += ((double) time.hash_lin.Insert) / (double) CLOCKS_PER_SEC / 3;
       time_insert[i - 1][1] += ((double) time.hash_cep.Insert) / (double) CLOCKS_PER_SEC / 3;
