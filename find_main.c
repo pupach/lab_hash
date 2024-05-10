@@ -129,7 +129,9 @@ TestTimeAll DoTest(int size, int max_size, int amount_find, double probability)
   return ret;
 }
 
-#define SIZE 4
+#define AMOUNT_TEST 4
+#define AMOUNT_TRY 3
+#define COUNT_HASH_TABLE 4
 
 int main() {
   TestTimeAll time;
@@ -137,22 +139,22 @@ int main() {
   FILE *stream_cep_Hash = fopen("../data/Cep_Hash_find.txt", "w");
   FILE *stream_hash_quad  = fopen("../data/hash_quad_find.txt",  "w");
   FILE *stream_Two_Hash    = fopen("../data/Perfect_find.txt",    "w");
-  double time_insert[SIZE][4] = {};
+  double time_insert[AMOUNT_TEST][COUNT_HASH_TABLE] = {};
 
-  for(int i = 1; i < SIZE + 1; i += 1)
+  for(int i = 1; i < AMOUNT_TEST + 1; i += 1)
   {
-    for(int j = 0; j < 3; j++) {
+    for(int j = 0; j < AMOUNT_TRY; j++) {
       fprintf(stderr, "%d\n", i);
       time = DoTest(100000, 1000000, 10000000, 1);
 
-      time_insert[i - 1][0] += ((double) time.hash_lin.Insert) / (double) CLOCKS_PER_SEC / 3;
-      time_insert[i - 1][1] += ((double) time.hash_cep.Insert) / (double) CLOCKS_PER_SEC / 3;
-      time_insert[i - 1][2] += ((double) time.hash_qud.Insert) / (double) CLOCKS_PER_SEC / 3;
-      time_insert[i - 1][3] += ((double) time.hash_two.Insert) / (double) CLOCKS_PER_SEC / 3;
+      time_insert[i - 1][0] += ((double) time.hash_lin.Insert) / (double) CLOCKS_PER_SEC / AMOUNT_TRY;
+      time_insert[i - 1][1] += ((double) time.hash_cep.Insert) / (double) CLOCKS_PER_SEC / AMOUNT_TRY;
+      time_insert[i - 1][2] += ((double) time.hash_qud.Insert) / (double) CLOCKS_PER_SEC / AMOUNT_TRY;
+      time_insert[i - 1][3] += ((double) time.hash_two.Insert) / (double) CLOCKS_PER_SEC / AMOUNT_TRY;
     }
   }
 
-  for(int i = 0; i < SIZE; i++)
+  for(int i = 0; i < AMOUNT_TEST; i++)
   {
     fprintf(stream_hash_lin, "%d, %lf\n",1,  time_insert[i][0]);
     fprintf(stream_cep_Hash, "%d, %lf\n",1,  time_insert[i][1]);

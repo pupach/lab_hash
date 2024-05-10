@@ -5,7 +5,7 @@
 #include "hash_quad_func.h"
 #include "hash_two_func.h"
 
-#define MAX_SIZE_DIR 100
+#define MAX_AMOUNT_TEST_DIR 100
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -102,8 +102,9 @@ TestTimeAll DoTest(int size, int max_size, int capacity, double load_factor)
     return ret;
 }
 
-#define SIZE 23
+#define AMOUNT_TEST 23
 #define COUNT_HASH_TABLE 4
+#define AMOUNT_TRY 3
 
 int main() {
     TestTimeAll time;
@@ -111,21 +112,21 @@ int main() {
     FILE *stream_cep_Hash   = fopen("../data/Cep_Hash.txt", "w");
     FILE *stream_hash_quad  = fopen("../data/hash_quad.txt",  "w");
     FILE *stream_Two_Hash   = fopen("../data/Two_Hash.txt",    "w");
-    double time_insert[SIZE][COUNT_HASH_TABLE] = {};
+    double time_insert[AMOUNT_TEST][COUNT_HASH_TABLE] = {};
 
-    for(int i = 1; i < SIZE + 1; i += 1)
+    for(int i = 1; i < AMOUNT_TEST + 1; i += 1)
     {
-        for(int j = 0; j < 3; j++) {
+        for(int j = 0; j < AMOUNT_TRY; j++) {
             time = DoTest(100000, 10000000, 1000,  (double) 6 / (double) (i + 7) );
 
-            time_insert[i - 1][0] += ((double) time.hash_lin.Insert) / (double) CLOCKS_PER_SEC / (double)3;
-            time_insert[i - 1][1] += ((double) time.hash_cep.Insert) / (double) CLOCKS_PER_SEC / (double)3;
-            time_insert[i - 1][2] += ((double) time.hash_quad.Insert) / (double) CLOCKS_PER_SEC / (double)3;
-            time_insert[i - 1][3] += ((double) time.hash_two.Insert) / (double) CLOCKS_PER_SEC / (double)3;
+            time_insert[i - 1][0] += ((double) time.hash_lin.Insert) / (double) CLOCKS_PER_SEC / (double)AMOUNT_TRY;
+            time_insert[i - 1][1] += ((double) time.hash_cep.Insert) / (double) CLOCKS_PER_SEC / (double)AMOUNT_TRY;
+            time_insert[i - 1][2] += ((double) time.hash_quad.Insert) / (double) CLOCKS_PER_SEC / (double)AMOUNT_TRY;
+            time_insert[i - 1][3] += ((double) time.hash_two.Insert) / (double) CLOCKS_PER_SEC / (double)AMOUNT_TRY;
         }
     }
 
-    for(int i = 0; i < SIZE; i++)
+    for(int i = 0; i < AMOUNT_TEST; i++)
     {
         fprintf(stream_hash_lin,  "%lf,%lf\n", (double) (i + 7) / (double) 6, time_insert[i][0]);
         fprintf(stream_cep_Hash,  "%lf,%lf\n", (double) (i + 7) / (double) 6, time_insert[i][1]);
