@@ -1,10 +1,14 @@
 #include "hash_chain.h"
 
+#define CHECK_RES_CALLOC(ptr) \
+    if(ptr == NULL) fprintf(stderr, "MEMPRY LIMIT ERROR\n");
+
 void List_init(List *list, int beg_capacity)
 {
   list->capacity = beg_capacity;
 
   list->arr = (Elem_listCep *)calloc(sizeof(Elem_listCep), list->capacity + 1);
+  CHECK_RES_CALLOC(list->arr)
 
   list->arr[0].val = 1;
   list->arr[0].next = 0;
@@ -22,10 +26,12 @@ void Realloc_List(List *list, int new_capacity)
   if(new_capacity == -1)  new_capacity = list->capacity * 2;
 
   Elem_listCep *new_list_arr = (Elem_listCep *)realloc(list->arr, (new_capacity + 1) * sizeof(Elem_listCep));
+  CHECK_RES_CALLOC(list->arr)
+  free(list->arr);
 
   list->arr = new_list_arr;
 
-  for(int i = list->capacity; i < new_capacity + 1; i++)
+  for(size_t i = list->capacity; i < new_capacity + 1; i++)
   {
     list->arr[i].prev = i - 1;
     list->arr[i].next = i + 1;
@@ -38,7 +44,7 @@ bool find_Elem_in_list(List *list, int ind_to_find)
 {
     int cur_ind = 0;
 
-    for (int cur_Elem = 0; cur_Elem < list->capacity; cur_Elem++)
+    for (size_t cur_Elem = 0; cur_Elem < list->capacity; cur_Elem++)
     {
         cur_ind = list->arr[cur_ind].next;
         if (list->arr[cur_ind].val == ind_to_find) return true;
@@ -164,11 +170,13 @@ bool FindTableElemCep(HashTableListCep *table, int ElemToRemove)
 
 void InitTableList(HashTableListCep *table, int capacity, int(*HashFunc)(HashTableListCep *, ElemToUseList))
 {
-    table->consts[0] = 3;
-    table->consts[1] = 1;
+  table->consts[0] = 3;
+  table->consts[1] = 1;
   table->capacity = capacity;
   table->size = 0;
   table->arr = (ElemTableList *)calloc(capacity, sizeof(ElemTableList));
+  CHECK_RES_CALLOC(table->arr)
+
   for(int i = 0; i < capacity; i++)
   {
     List_init(table->arr + i, BEG_CAPACITY_LIST);

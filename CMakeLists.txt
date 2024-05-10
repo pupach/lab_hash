@@ -21,6 +21,12 @@ add_executable(lab_hash main.c
         hash_chain.h
         hash_open_adress.c
         hash_open_adress.h
+        hash_lin.c
+        hash_lin.h
+        hash_quad_func.c
+        hash_quad_func.h
+        hash_two_func.c
+        hash_two_func.h
 )
 
 
@@ -32,12 +38,24 @@ add_executable(lab_hash_find
         Hash_Perfect.h
         Hash_Perfect.c
         find_main.c
-        find_main.h)
+        find_main.h
+        hash_lin.c
+        hash_lin.h
+        hash_quad_func.c
+        hash_quad_func.h
+        hash_two_func.c
+        hash_two_func.h)
 
 add_executable(lab_hash_random
         hash_chain.c
         hash_chain.h
         hash_open_adress.c
         hash_open_adress.h
-        main_random.c)
+        main_random.c
+        hash_lin.c
+        hash_lin.h
+        hash_quad_func.c
+        hash_quad_func.h
+        hash_two_func.c
+        hash_two_func.h)
 

@@ -2,8 +2,8 @@
 // Created by pupach on 03.05.24.
 //
 
-#ifndef LAB_HASH_HASH_LIN_H
-#define LAB_HASH_HASH_LIN_H
+#ifndef LAB_HASH_HASH_OPEN_ADRESS
+#define LAB_HASH_HASH_OPEN_ADRESS
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,25 +33,9 @@ typedef struct{
 
 }HashTable;
 
+int MainHashFuncOpenAdress(HashTable *table, ElemToUse ElenToHash);
+
 void InitTable(HashTable *table, int capacity, int(*HashFunc)(HashTable *, int));
 
-void AddElemTableQuad(HashTable *table, ElemToUse ElemToAdd);
 
-void AddElemTableLin(HashTable *table, ElemToUse ElemToAdd);
-
-int MainHashFunc(HashTable *table, ElemToUse ElenToHash);
-
-bool FindElemTableLin(HashTable *table, ElemToUse ElemToFind);
-
-bool FindElemTableQuad(HashTable *table, ElemToUse ElemToFind);
-
-void RemoveElemTableQuad(HashTable *table, ElemToUse ElemToRemove);
-
-void RemoveElemTableLin(HashTable *table, ElemToUse ElemToRemove);
-
-void AddElemTableTwo(HashTable *table, ElemToUse ElemToAdd);
-
-bool FindElemTableLin(HashTable *table, ElemToUse ElemToFind);
-
-void RemoveElemTableTwo(HashTable *table, ElemToUse ElemToRemove);
 #endif //LAB_HASH_HASH_LIN_H
