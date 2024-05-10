@@ -74,7 +74,7 @@ void List_add_Elem_on_O1(List *list, long int val_Elem, int ind_to_ins)
 
 int MainHashFuncCep(HashTableListCep *table, ElemToUseList ElenToHash)
 {
-  int hash = (int)((ElenToHash * table->consts[0] + table->consts[1])
+  int hash = (int)((ElenToHash * table->hash_consts[0] + table->hash_consts[1])
               % PowerUniverse) % table->capacity;
   return hash;
 }
@@ -167,8 +167,8 @@ bool FindTableElemCep(HashTableListCep *table, int ElemToRemove)
 
 void InitTableList(HashTableListCep *table, int capacity, int(*HashFunc)(HashTableListCep *, ElemToUseList), double load_factor)
 {
-  table->consts[0] = 3;
-  table->consts[1] = 1;
+  table->hash_consts[0] = 3;
+  table->hash_consts[1] = 1;
   table->load_factor = load_factor;
   table->capacity = capacity;
   table->size = 0;

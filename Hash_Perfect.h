@@ -36,7 +36,7 @@ typedef struct{
     int size;
     int capacity;
     bool nul;
-    int consts[3];
+    int hash_consts[3];
     int (*HashFunc)(struct HashTablePerfect *, ElemToUse);
     ElemTablePerfect *arr;
 

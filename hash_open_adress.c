@@ -23,10 +23,10 @@ int SecondHashFunc(HashTable *table, ElemToUse ElenToHash)
 
 void InitTable(HashTable *table, int capacity, int(*HashFunc)(HashTable *, int), double load_factor)
 {
-  table->consts[0] = 3;
-  table->consts[1] = 7;
-  table->consts[2] = 5;
-  table->consts[3] = 1;
+  table->hash_consts[0] = 3;
+  table->hash_consts[1] = 7;
+  table->hash_consts[2] = 5;
+  table->hash_consts[3] = 1;
   table->load_factor = load_factor;
 
   table->capacity = capacity;

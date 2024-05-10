@@ -39,7 +39,7 @@ void AddElemTableQuad(HashTable *table, ElemToUse ElemToAdd)
   int step = 0;
   while((table->arr[hash].val != POISON_VAL) && (table->arr[hash].val != ElemToAdd))
   {
-    hash = (hash + step * table->consts[2] + step * step * table->consts[3]) % table->capacity;
+    hash = (hash + step * table->hash_consts[2] + step * step * table->hash_consts[3]) % table->capacity;
     step++;
   }
 
@@ -56,17 +56,17 @@ void RemoveElemTableQuad(HashTable *table, ElemToUse ElemToRemove)
   while(table->arr[hash].val != POISON_VAL && (table->arr[hash].val != ElemToRemove))
   {
     step++;
-    hash = (hash + step * table->consts[2] + step * step * table->consts[3]) % table->capacity;
+    hash = (hash + step * table->hash_consts[2] + step * step * table->hash_consts[3]) % table->capacity;
   }
   step++;
   if(table->arr[hash].val == POISON_VAL) return;
   table->arr[hash].val = POISON_VAL;
   table->arr[hash].step = 0;
 
-  while(table->arr[(hash + step * table->consts[2] + step * step * table->consts[3]) % table->capacity].step > 0)
+  while(table->arr[(hash + step * table->hash_consts[2] + step * step * table->hash_consts[3]) % table->capacity].step > 0)
   {
-    swap(&(table->arr[hash].val), &(table->arr[(hash + step * table->consts[2] + step * step * table->consts[3]) % table->capacity].val));
-    hash = (hash + step * table->consts[2] + step * step * table->consts[3]) % table->capacity;
+    swap(&(table->arr[hash].val), &(table->arr[(hash + step * table->hash_consts[2] + step * step * table->hash_consts[3]) % table->capacity].val));
+    hash = (hash + step * table->hash_consts[2] + step * step * table->hash_consts[3]) % table->capacity;
     step++;
   }
 }
@@ -77,7 +77,7 @@ bool FindElemTableQuad(HashTable *table, ElemToUse ElemToFind)
   int step = 0;
   while((table->arr[hash].val != POISON_VAL) && (table->arr[hash].val != ElemToFind))
   {
-    hash = (hash + step * table->consts[2] + step * step * table->consts[3]) % table->capacity;
+    hash = (hash + step * table->hash_consts[2] + step * step * table->hash_consts[3]) % table->capacity;
     step++;
   }
 

@@ -5,17 +5,17 @@
 
 int HashPerfect(HashTablePerfect *table, ElemToUse ElenToHash)
 {
-  int hash = (((ElenToHash * table->consts[0] + table->consts[1])
-              ) % table->consts[2] % table->capacity + table->capacity) % table->capacity;
-  LOG("MainHashFunc hash = %d, ElenToHash = %d const0 = %d const1 = %d cop = %d\n", hash, ElenToHash, table->consts[0], table->consts[1], table->capacity);
+  int hash = (((ElenToHash * table->hash_hash_consts[0] + table->hash_consts[1])
+              ) % table->hash_consts[2] % table->capacity + table->capacity) % table->capacity;
+  LOG("MainHashFunc hash = %d, ElenToHash = %d const0 = %d const1 = %d cop = %d\n", hash, ElenToHash, table->hash_consts[0], table->hash_consts[1], table->capacity);
   return hash;
 }
 
 int HashPerfectForUsuallyHashTable(HashTable *table, ElemToUse ElenToHash)
 {
-  int hash = (((ElenToHash * table->consts[0] + table->consts[1])
-              ) % table->consts[2] % table->capacity + table->capacity) % table->capacity;
-  LOG("MainHashFunc hash = %d, ElenToHash = %d const0 = %d const1 = %d cop = %d\n", hash, ElenToHash, table->consts[0], table->consts[1], table->capacity);
+  int hash = (((ElenToHash * table->hash_consts[0] + table->hash_consts[1])
+              ) % table->hash_consts[2] % table->capacity + table->capacity) % table->capacity;
+  LOG("MainHashFunc hash = %d, ElenToHash = %d const0 = %d const1 = %d cop = %d\n", hash, ElenToHash, table->hash_consts[0], table->hash_consts[1], table->capacity);
   return hash;
 }
 
@@ -65,10 +65,10 @@ void GenSecondHashFunc(HashTable *table, int *val, int AmountCom);
 
 void InitTablePerfect1(HashTable *table, int capacity, int(*HashFunc)(HashTable *, int), double load_factor)
 {
-  table->consts[0] = 3;
-  table->consts[1] = 7;
-  table->consts[2] = 5;
-  table->consts[3] = 1;
+  table->hash_consts[0] = 3;
+  table->hash_consts[1] = 7;
+  table->hash_consts[2] = 5;
+  table->hash_consts[3] = 1;
   table->load_factor = load_factor;
 
   table->capacity = capacity;
@@ -92,10 +92,10 @@ void GenFirstHashFunc(HashTablePerfect *table, int *val, int AmountCom, int ogra
   int cnt = 0;
   do{
     cnt1++;
-    table->consts[0] = rand() % table->capacity + 1;
-    table->consts[1] = rand() % table->capacity + 1;
-    table->consts[2] = (rand() + table->capacity) % (3 * table->capacity + 1) + 1;
-    LOG("const 1 = %d 2 = %d\n", table->consts[0], table->consts[1]);
+    table->hash_consts[0] = rand() % table->capacity + 1;
+    table->hash_consts[1] = rand() % table->capacity + 1;
+    table->hash_consts[2] = (rand() + table->capacity) % (3 * table->capacity + 1) + 1;
+    LOG("const 1 = %d 2 = %d\n", table->hash_consts[0], table->hash_consts[1]);
     cnt = FindCollisionHashTablePerfect(table, val, AmountCom);
 
     LOG("\n GenFirstHashFunc cnt = %d, ogranich = %d \n", cnt, ogranich);
@@ -145,10 +145,10 @@ void GenSecondHashFunc(HashTable *table, int *val, int AmountCom)
   int cnt = 0;
   do{
     cnt1++;
-    table->consts[0] = rand() % table->capacity + 1;
-    table->consts[1] = rand() % table->capacity + 1;
-    table->consts[2] = rand() % 10000 + 10000 + 1;
-    LOG("const 1 = %d 2 = %d\n", table->consts[0], table->consts[1]);
+    table->hash_consts[0] = rand() % table->capacity + 1;
+    table->hash_consts[1] = rand() % table->capacity + 1;
+    table->hash_consts[2] = rand() % 10000 + 10000 + 1;
+    LOG("const 1 = %d 2 = %d\n", table->hash_consts[0], table->hash_consts[1]);
     cnt = FindCollisionHashTable(table, val, AmountCom);
     LOG("\nAmountCom = %d cnt = %d\n", AmountCom, cnt);
 

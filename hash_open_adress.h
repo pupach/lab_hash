@@ -32,7 +32,7 @@ typedef struct{
     int size;
     int capacity;
     double load_factor;
-    int consts[MAX_SIZE_CONSTS];
+    int hash_consts[MAX_SIZE_CONSTS];
     int (*HashFunc)(struct HashTable *, ElemToUse);
     ElemTable *arr;
 
