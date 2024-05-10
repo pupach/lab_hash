@@ -1,8 +1,8 @@
-#include "hash_chain.h"
-#include "hash_open_adress.h"
-#include "hash_lin.h"
-#include "hash_quad_func.h"
-#include "hash_two_func.h"
+#include "hash_chain/hash_chain.h"
+#include "open_adress_hash/hash_open_adress.h"
+#include "open_adress_hash/hash_lin.h"
+#include "open_adress_hash/hash_quad_func.h"
+#include "open_adress_hash/hash_two_func.h"
 
 
 #include <stdio.h>

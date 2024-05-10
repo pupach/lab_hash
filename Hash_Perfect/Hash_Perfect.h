@@ -11,7 +11,7 @@
 #include <math.h>
 #include <string.h>
 #include <time.h>
-#include "hash_lin.h"
+#include "../open_adress_hash/hash_lin.h"
 #define PowerUniverse 2147483647
 #define MAX_RAND 1000000000
 #define MAX_SIZE_TABLE 10000000
