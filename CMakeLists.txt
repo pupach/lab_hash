@@ -23,6 +23,7 @@ add_executable(lab_hash main.c
         hash_open_adress.h
 )
 
+
 add_executable(lab_hash_find
         hash_chain.c
         hash_chain.h
