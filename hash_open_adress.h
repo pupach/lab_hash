@@ -15,13 +15,18 @@
 #define POISON_VAL -1
 
 
+#define CHECK_RES_CALLOC(ptr) \
+    if(ptr == NULL) exit(-1);
+
 typedef int ElemToUse;
+
+void swap(ElemToUse *l1, ElemToUse *l2);
 
 typedef struct
 {
     ElemToUse val;
     int step;
-}ElemTable;
+} ElemTable;
 
 typedef struct{
     int size;
@@ -31,11 +36,14 @@ typedef struct{
     int (*HashFunc)(struct HashTable *, ElemToUse);
     ElemTable *arr;
 
-}HashTable;
+} HashTable;
 
 int MainHashFuncOpenAdress(HashTable *table, ElemToUse ElenToHash);
 
-void InitTable(HashTable *table, int capacity, int(*HashFunc)(HashTable *, int));
+int SecondHashFunc(HashTable *table, ElemToUse ElenToHash);
 
+void InitTable(HashTable *table, int capacity, int(*HashFunc)(HashTable *, int), double load_factor);
+
+int MainHashFuncPerfectHashTable(HashTable *table, ElemToUse ElenToHash);
 
 #endif //LAB_HASH_HASH_LIN_H

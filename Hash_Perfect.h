@@ -11,13 +11,14 @@
 #include <math.h>
 #include <string.h>
 #include <time.h>
+#include "hash_lin.h"
 #define PowerUniverse 2147483647
 #define MAX_RAND 1000000000
 #define MAX_SIZE_TABLE 10000000
-#define MAX_SIZE_CONSTS 3
-#define MAX_SIZE_COM 3
+#define MAX_SIZE_CONSTS 5
+#define MAX_SIZE_COM 5
 #define LOG(args...) \
-    //      fprintf(stderr, args)
+         //fprintf(stderr, args)
 
 extern struct HashTablePerfect;
 
@@ -25,21 +26,21 @@ typedef int ElemToUse;
 
 typedef struct
 {
-    struct HashTablePerfect *val;
+    HashTable *val;
     int *arr;
     int step;
     int size;
-}ElemTablePerfect;
+} ElemTablePerfect;
 
 typedef struct{
     int size;
     int capacity;
     bool nul;
-    int consts[2];
+    int consts[3];
     int (*HashFunc)(struct HashTablePerfect *, ElemToUse);
     ElemTablePerfect *arr;
 
-}HashTablePerfect;
+} HashTablePerfect;
 
 bool FindElemTablePerfect(HashTablePerfect *table, ElemToUse ElemToFind);
 

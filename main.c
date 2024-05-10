@@ -1,6 +1,9 @@
 ﻿#include "hash_chain.h"
 #include "hash_open_adress.h"
 #include "Hash_Perfect.h"
+#include "hash_lin.h"
+#include "hash_quad_func.h"
+#include "hash_two_func.h"
 
 #define MAX_SIZE_DIR 100
 
@@ -13,15 +16,15 @@
 typedef struct{
     clock_t Insert;
 
-}TestTimeOne;
+} TestTimeOne;
 
 typedef struct{
     TestTimeOne hash_lin;
-    TestTimeOne hash_qud;
+    TestTimeOne hash_quad;
     TestTimeOne hash_cep;
     TestTimeOne hash_two;
 
-}TestTimeAll;
+} TestTimeAll;
 
 
 TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
@@ -29,23 +32,20 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
     TestTimeAll ret = {};
 
     HashTableListCep hash_cep = {};
-    hash_cep.load_factor = load_factor;
-    InitTableList(&hash_cep, capacity, &MainHashFuncCep);
+    InitTableList(&hash_cep, capacity, &MainHashFuncCep, load_factor);
 
     HashTable hash_lin = {};
-    hash_lin.load_factor = load_factor;
-    InitTable(&hash_lin, capacity, &MainHashFunc);
+    InitTable(&hash_lin, capacity, &MainHashFuncOpenAdress, load_factor);
 
-    HashTable hash_qud = {};
-    hash_qud.load_factor = load_factor;
-    InitTable(&hash_qud, capacity, &MainHashFunc);
+    HashTable hash_quad = {};
+    InitTable(&hash_quad, capacity, &MainHashFuncOpenAdress, load_factor);
 
     HashTable hash_two = {};
-    hash_two.load_factor = load_factor;
-    InitTable(&hash_two, capacity, &MainHashFunc);
+    InitTable(&hash_two, capacity, &MainHashFuncOpenAdress,load_factor );
 
     int *data = (int *)calloc(size, sizeof(int));
-
+    CHECK_RES_CALLOC(data)
+    
     srand(clock());
     for(int i = 0; i < size; i++)
     {
@@ -62,7 +62,7 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
     fprintf(stderr, "hash_cep ready\n");
 
     ret.hash_lin.Insert = clock();
-    for(int i = 0; i < size; i++)
+    for(size_t i = 0; i < size; i++)
     {
         AddElemTableLin(&hash_lin, data[i]);
     }
@@ -70,14 +70,14 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
 
     fprintf(stderr, "hash_lin ready\n");
 
-    ret.hash_qud.Insert = clock();
+    ret.hash_quad.Insert = clock();
     for(int i = 0; i < size; i++)
     {
-        AddElemTableQuad(&hash_qud, data[i]);
+        AddElemTableQuad(&hash_quad, data[i]);
     }
-    ret.hash_qud.Insert = clock() - ret.hash_qud.Insert;
+    ret.hash_quad.Insert = clock() - ret.hash_quad.Insert;
 
-    fprintf(stderr, "hash_qud ready\n");
+    fprintf(stderr, "hash_quad ready\n");
 
     ret.hash_two.Insert = clock();
     for(int i = 0; i < size; i++)
@@ -93,7 +93,7 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
     {
         free(hash_cep.arr[i].arr);
     }
-    free(hash_qud.arr);
+    free(hash_quad.arr);
     free(hash_two.arr);
     free(hash_lin.arr);
     free(hash_cep.arr);
@@ -103,6 +103,7 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
 }
 
 #define SIZE 23
+#define COUNT_HASH_TABLE 4
 
 int main() {
     TestTimeAll time;
@@ -110,9 +111,7 @@ int main() {
     FILE *stream_cep_Hash   = fopen("../data/Cep_Hash.txt", "w");
     FILE *stream_hash_quad  = fopen("../data/hash_quad.txt",  "w");
     FILE *stream_Two_Hash   = fopen("../data/Two_Hash.txt",    "w");
-    double time_insert[SIZE][4] = {};
-    double time_remove[SIZE][4] = {};
-    //DoOneTest(1000, 1000, 10000);
+    double time_insert[SIZE][COUNT_HASH_TABLE] = {};
 
     for(int i = 1; i < SIZE + 1; i += 1)
     {
@@ -121,7 +120,7 @@ int main() {
 
             time_insert[i - 1][0] += ((double) time.hash_lin.Insert) / (double) CLOCKS_PER_SEC / (double)3;
             time_insert[i - 1][1] += ((double) time.hash_cep.Insert) / (double) CLOCKS_PER_SEC / (double)3;
-            time_insert[i - 1][2] += ((double) time.hash_qud.Insert) / (double) CLOCKS_PER_SEC / (double)3;
+            time_insert[i - 1][2] += ((double) time.hash_quad.Insert) / (double) CLOCKS_PER_SEC / (double)3;
             time_insert[i - 1][3] += ((double) time.hash_two.Insert) / (double) CLOCKS_PER_SEC / (double)3;
         }
     }

@@ -4,14 +4,6 @@
 
 #include "hash_open_adress.h"
 
-void swap(ElemToUse *l1, ElemToUse *l2)
-{
-  ElemToUse x = *l1;
-  *l1 = *l2;
-  *l2 = x;
-}
-
-
 
 int MainHashFuncOpenAdress(HashTable *table, ElemToUse ElenToHash)
 {
@@ -29,66 +21,22 @@ int SecondHashFunc(HashTable *table, ElemToUse ElenToHash)
     return hash;
 }
 
-
-void ReHashTwo(HashTable *table)
+void InitTable(HashTable *table, int capacity, int(*HashFunc)(HashTable *, int), double load_factor)
 {
-    int old_cap = table->capacity;
-    table->capacity *= 2;
-    ElemTable *old_arr = table->arr;
-    table->arr = (ElemTable *)calloc(sizeof(ElemTable), table->capacity);
-    for(int i = 0; i < table->capacity; i++)
-    {
-        table->arr[i].val = POISON_VAL;
-    }
+  table->consts[0] = 3;
+  table->consts[1] = 7;
+  table->consts[2] = 5;
+  table->consts[3] = 1;
+  table->load_factor = load_factor;
 
-    for(int i = 0; i < old_cap; i++)
-    {
-        if(old_arr[i].val != POISON_VAL)
-        {
-            AddElemTableTwo(table, old_arr[i].val);
-        }
-    }
-    free(old_arr);
-}
+  table->capacity = capacity;
+  table->size = 0;
+  table->arr = (ElemTable *)calloc(capacity, sizeof(ElemTable));
+  CHECK_RES_CALLOC(table->arr)
 
-
-void AddElemTableTwo(HashTable *table, ElemToUse ElemToAdd)
-{
-    if((table->size + 2) > (int)(((double )table->capacity) * table->load_factor))
-    {
-        ReHashTwo(table);
-    }
-    int hash2 = MainHashFuncOpenAdress(table, ElemToAdd);
-    int hash1 = SecondHashFunc(table, ElemToAdd);
-    int hash = hash2;
-    int step = 0;
-
-    while((table->arr[hash].val != POISON_VAL) && (table->arr[hash].val != ElemToAdd))
-    {
-        step++;
-        hash = (int)(((long long int )hash1 * (long long int )step + (long long int )hash2) % table->capacity);
-    }
-
-    if(table->arr[hash].val == POISON_VAL) table->size++;
-    table->arr[hash].val  = ElemToAdd;
-    table->arr[hash].step = step;
-    return;
-}
-
-
-
-void InitTable(HashTable *table, int capacity, int(*HashFunc)(HashTable *, int))
-{
-    table->consts[0] = 3;
-    table->consts[1] = 7;
-    table->consts[2] = 5;
-    table->consts[3] = 1;
-    table->capacity = capacity;
-    table->size = 0;
-    table->arr = (ElemTable *)calloc(capacity, sizeof(ElemTable));
-    for(int i = 0; i < capacity; i++)
-    {
-        table->arr[i].val = POISON_VAL;
-    }
-    table->HashFunc = HashFunc;
+  for(int i = 0; i < capacity; i++)
+  {
+      table->arr[i].val = POISON_VAL;
+  }
+  table->HashFunc = HashFunc;
 }

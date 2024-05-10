@@ -1,5 +1,9 @@
 #include "hash_chain.h"
 #include "hash_open_adress.h"
+#include "hash_lin.h"
+#include "hash_quad_func.h"
+#include "hash_two_func.h"
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,20 +32,16 @@ TestTimeAll DoOneTest(int size, int max_size, int capacity, double load_factor)
     TestTimeAll ret = {};
 
     HashTableListCep hash_cep = {};
-    hash_cep.load_factor = load_factor;
-    InitTableList(&hash_cep, capacity, &MainHashFuncCep);
+    InitTableList(&hash_cep, capacity, &MainHashFuncCep, load_factor);
 
     HashTable hash_lin = {};
-    hash_lin.load_factor = load_factor;
-    InitTable(&hash_lin, capacity, &MainHashFunc);
+    InitTable(&hash_lin, capacity, &MainHashFuncOpenAdress, load_factor);
 
     HashTable hash_qud = {};
-    hash_qud.load_factor = load_factor;
-    InitTable(&hash_qud, capacity, &MainHashFunc);
+    InitTable(&hash_qud, capacity, &MainHashFuncOpenAdress, load_factor);
 
     HashTable hash_two = {};
-    hash_two.load_factor = load_factor;
-    InitTable(&hash_two, capacity, &MainHashFunc);
+    InitTable(&hash_two, capacity, &MainHashFuncOpenAdress, load_factor);
 
     int (*data)[2] = (int *)calloc(size, sizeof(int[2]));
 

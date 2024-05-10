@@ -10,6 +10,11 @@
 #define MAX_SIZE_COM 2
 #define LOG(args...) \
         //fprintf(stderr, args)
+
+#define CHECK_RES_CALLOC(ptr) \
+    if(ptr == NULL) fprintf(stderr, "MEMPRY LIMIT ERROR\n");
+
+
 typedef int ElemToUseList;
 
 #define POISON_VAL NULL
@@ -49,7 +54,7 @@ typedef struct{
 
 bool FindTableElemCep(HashTableListCep *table, int ElemToRemove);
 
-void InitTableList(HashTableListCep *table, int capacity, int(*HashFunc)(HashTableListCep *, ElemToUseList));
+void InitTableList(HashTableListCep *table, int capacity, int(*HashFunc)(HashTableListCep *, ElemToUseList), double load_factor);
 
 void AddElemTableList(HashTableListCep *table, ElemToUseList ElemToAdd);
 

@@ -38,7 +38,6 @@ add_executable(lab_hash_find
         Hash_Perfect.h
         Hash_Perfect.c
         find_main.c
-        find_main.h
         hash_lin.c
         hash_lin.h
         hash_quad_func.c

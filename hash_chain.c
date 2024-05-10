@@ -1,8 +1,5 @@
 #include "hash_chain.h"
 
-#define CHECK_RES_CALLOC(ptr) \
-    if(ptr == NULL) fprintf(stderr, "MEMPRY LIMIT ERROR\n");
-
 void List_init(List *list, int beg_capacity)
 {
   list->capacity = beg_capacity;
@@ -120,7 +117,7 @@ void ReHashCep(HashTableListCep *table)
     int old_cap = table->capacity;
     table->capacity *= 2;
     ElemTableList *old_arr = table->arr;
-    InitTableList(table, table->capacity, table->HashFunc);
+    InitTableList(table, table->capacity, table->HashFunc, table->load_factor);
 
 
     for(int i = 0; i < old_cap; i++)
@@ -168,10 +165,11 @@ bool FindTableElemCep(HashTableListCep *table, int ElemToRemove)
 }
 
 
-void InitTableList(HashTableListCep *table, int capacity, int(*HashFunc)(HashTableListCep *, ElemToUseList))
+void InitTableList(HashTableListCep *table, int capacity, int(*HashFunc)(HashTableListCep *, ElemToUseList), double load_factor)
 {
   table->consts[0] = 3;
   table->consts[1] = 1;
+  table->load_factor = load_factor;
   table->capacity = capacity;
   table->size = 0;
   table->arr = (ElemTableList *)calloc(capacity, sizeof(ElemTableList));

@@ -4,13 +4,6 @@
 
 #include "hash_quad_func.h"
 
-void swap(ElemToUse *l1, ElemToUse *l2)
-{
-  ElemToUse x = *l1;
-  *l1 = *l2;
-  *l2 = x;
-}
-
 
 void ReHashQuad(HashTable *table)
 {
@@ -18,6 +11,8 @@ void ReHashQuad(HashTable *table)
   table->capacity *= 2;
   ElemTable *old_arr = table->arr;
   table->arr = (ElemTable *)calloc(sizeof(ElemTable), table->capacity);
+  CHECK_RES_CALLOC(table->arr)
+
   for(int i = 0; i < table->capacity; i++)
   {
     table->arr[i].val = POISON_VAL;

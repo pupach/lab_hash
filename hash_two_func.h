@@ -11,4 +11,5 @@ void AddElemTableTwo(HashTable *table, ElemToUse ElemToAdd);
 void RemoveElemTableTwo(HashTable *table, ElemToUse ElemToRemove);
 
 
+
 #endif //LAB_HASH_HASH_TWO_FUNC_H

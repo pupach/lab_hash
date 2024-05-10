@@ -16,7 +16,7 @@ def gen_graphs(fileNames, title):
             for ROWS in plotting:
                 print(ROWS, name)
                 X.append(int(ROWS[0]))
-                Y.append(float(ROWS[1]))
+                Y.append(1 / float(ROWS[1]))
 
         plt.plot(X, Y)
         X.clear()
